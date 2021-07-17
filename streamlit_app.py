@@ -6,7 +6,7 @@ import datetime
 usdrub = 74
 
 import locale
-locale.setlocale( locale.LC_ALL, 'EN-gb' )
+locale.setlocale( locale.LC_ALL, 'en-GB' )
 def rub(x):
     return locale.format_string('%g',val=x,grouping=True)+' rub'
 
