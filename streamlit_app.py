@@ -5,10 +5,11 @@ import datetime
 
 usdrub = 74
 
-import locale
-locale.setlocale( locale.LC_ALL, 'en-GB' )
+
+#import locale
+#locale.setlocale( locale.LC_ALL, 'en-GB' )
 def rub(x):
-    return locale.format_string('%g',val=x,grouping=True)+' rub'
+    return f'{x} rub' #locale.format_string('%g',val=x,grouping=True)+' rub' 
 
 d0 = datetime.datetime.today().date()
 d1 = (d0 + datetime.timedelta(days=30*6)
