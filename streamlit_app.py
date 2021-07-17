@@ -62,13 +62,14 @@ result_t = pd.DataFrame({
 
 #Frontend
 
-st.header('Y review calculator')
+st.header('Yasha&Co Ltd review calculator')
 
 if rsu == 0:
     st.warning('Your assessment is too low to get an RSU 😒')
 
 st.markdown(f'Your bonus for the next 6 month will be: {rub(bonus)}. Equal to {rub(bonus_m)} per month adding to salary')
-st.markdown(f'Your RSU for the next 4 years will be: {rub(rsu)}. Equal to {rub(rsu_m)} per month adding to salary')
+if not rsu == 0:
+    st.markdown(f'Your RSU for the next 4 years will be: {rub(rsu)}. Equal to {rub(rsu_m)} per month adding to salary')
 st.markdown(f'Total salary: **{rub(salary+bonus_m+rsu_m)}**' )
 
 st.subheader('Forecasted month earnngs')
