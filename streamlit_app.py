@@ -1,18 +1,25 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-import datetime
+import pandas_datareader.data as web
+from datetime import datetime,timedelta
 
-usdrub = 74
+@st.cache
+def get_usdrub():
+    dt = datetime.today().date() - timedelta(days=90)
+    dt = dt.strftime('%Y-%m')
+    df = web.DataReader('CCUSMA02RUM618N', 'fred', dt) #month avg usdrub rate
+    return df.iloc[-1].values[0] #last month
 
+usdrub = get_usdrub()
 
 def rub(val):
     return '{:,.0f} ₽'.format(val)
 
-d0 = datetime.datetime.today().date()
-d1 = (d0 + datetime.timedelta(days=30*6)
+d0 = datetime.today().date()
+d1 = (d0 + timedelta(days=30*6)
       ).strftime('%Y-%m-%d')
-d2 = (d0 + datetime.timedelta(days=30*12)
+d2 = (d0 + timedelta(days=30*12)
       ).strftime('%Y-%m-%d')
 d0 = d0.strftime('%Y-%m-%d')
 
@@ -65,7 +72,7 @@ result_t = pd.DataFrame({
 st.header('Yasha&Co Ltd review calculator')
 
 if rsu == 0:
-    st.warning('Your assessment is too low to get an RSU 😒')
+    st.warning('Your assessment+grade is too low to get an RSU 😒')
 
 st.markdown(f'Your bonus for the next 6 month will be: {rub(bonus)}. Equal to {rub(bonus_m)} per month adding to salary')
 if not rsu == 0:
