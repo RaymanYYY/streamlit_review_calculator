@@ -6,9 +6,9 @@ from datetime import datetime,timedelta
 
 @st.cache
 def get_usdrub():
-    dt = datetime.today().date() - timedelta(days=90)
-    dt = dt.strftime('%Y-%m')
-    df = web.DataReader('CCUSMA02RUM618N', 'fred', dt) #month avg usdrub rate
+    #dt = datetime.today().date() - timedelta(days=120)
+    #dt = dt.strftime('%Y-%m')
+    df = web.DataReader('CCUSMA02RUM618N', 'fred', '2021-05-01') #month avg usdrub rate
     return df.iloc[-1].values[0] #last month
 
 usdrub = get_usdrub()
